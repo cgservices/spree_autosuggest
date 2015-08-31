@@ -29,7 +29,7 @@ module Spree
                       joins('LEFT JOIN spree_products ON (spree_products.id = spree_suggestions.product_id)').
                       joins('LEFT JOIN spree_variants ON (spree_variants.product_id = spree_products.id AND spree_variants.is_master = 1)')
         suggestions.collect!{|s|
-          image = s.product.andand.images.andand.first || s.product.andand.variants.andand.collect(&:images).flatten.first
+          image = s.product.andand.images.andand.first || s.product.andand.variants.andand.collect(&:images).andand.flatten.andand.first
           {
             keywords: s.keywords,
             url: s.data.present? && eval(s.data).has_key?(:url) ? eval(s.data)[:url] : '',
